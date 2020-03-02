@@ -8,7 +8,7 @@ module.exports.getAccessToken = async (event) => {
     + '?client_id=c4949b8e39243e2b3bfca7f5933b2eb1'
     + '&client_secret=659da9vt6r6ddt41f9tjnas6ta'
     + '&grant_type=authorization_code'
-    + '&redirect_uri=https://maryhoy.github.io/meetup/'
+    + '&redirect_uri=https://maryhoy.github.io/'
     + '&code=' + event.pathParameters.code;
 
   const info = await axios.post(MEETUP_OAUTH_URL);
