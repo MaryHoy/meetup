@@ -10,7 +10,8 @@
 #    docs.serverless.com
 #
 # Happy Coding!
-
+org: maryhoy
+app: meetup-serverless
 service: auth-server
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
@@ -24,7 +25,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: us-west-1
-  timeout: 30
+  timeout: 60
 
 # you can overwrite defaults here
 #  stage: dev
