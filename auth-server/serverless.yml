@@ -10,8 +10,6 @@
 #    docs.serverless.com
 #
 # Happy Coding!
-org: maryhoy
-app: meetup-serverless
 service: auth-server
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
