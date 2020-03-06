@@ -1,38 +1,41 @@
 import React, { Component } from 'react';
 
 class Event extends Component {
+
   state = {
-    event: [],
-    showDetails: false
+    show: false
+  };
+
+  showDetails = () => {
+    this.setState(prevState => ({
+      show: !prevState.show
+    }))
   }
 
-  handleShowDetails = () => {
-    if(this.state.showDetails === false) {
-      this.setState({ showDetails: true });
-    }
-    else {
-      this.setState({ showDetails: false });
-    }
-  }
 
   render() {
-    const showDetails = this.state.showDetails;
 
-    return(
-      <div className="event">
-        <div className="event__Overview">
-          <p className="event__Overview--name">{this.state.event.name}</p>
-          <p className="event__Overview--localDate">{this.state.event.local_date}</p>
-          <button className="details-btn" onClick={() => this.handleShowDetails()}>show details</button>
-        </div>
-        {showDetails &&
-          <div className="event__Details">
-            <p className="event__Details--description">{this.state.event.description}</p>
-          </div>
-        }
+    const {event} = this.props;
+
+    return (
+      <div className="Event">
+        <div className="eventName">{event.name}</div>
+          <p className="time">{event.local_time} on {event.local_date}</p>
+          <p className="rsvp">{event.yes_rsvp_count} people are going</p>
+        {this.state.show && (
+          <div className="details">
+            <div className="eventGroup">{event.group.name}</div>
+            <div className="eventLocation">{event.venue.address_1}</div>
+            <div className="description" dangerouslySetInnerHTML={{__html: event.description}} />
+            <a className="link" href={event.link}>Event link</a>
       </div>
-    );
-  }
+    )}
+      <button className="detailBtn"
+      onClick={this.showDetails}
+      >Show/hide Details</button>
+    </div>
+  )
+}
 }
 
-export default Event;
+export default Event
