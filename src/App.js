@@ -1,44 +1,30 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import EventList from './EventList';
 import CitySearch from './CitySearch';
+//import Event from './Event';
 import NumberOfEvents from './NumberOfEvents';
+//import { getSuggetions } from './api';
+//import { mockEvents } from './mock-events';
 import { getEvents } from './api';
 
+
 class App extends Component {
-
-  componentDidMount() {
-    getEvents().then(response => this.setState({ events: response }));
-  }
-
   state = {
     events: [],
-    page: null,
-    defaultCity: '',
-    lat: null,
-    lon: null
+    numOfEventsListed: null
   }
 
   updateEvents = (lat, lon, page) => {
-    if(lat && lon) {
-      getEvents(lat, lon, this.state.page).then(response => this.setState({ events: response, lat, lon }));
-    }
-    else if (page) {
-      getEvents(this.state.lat, this.state.lon, page).then(response => this.setState({ events: response, page }));
-    }
-    else {
-      getEvents(this.state.lat, this.state.lon, this.state.page).then(response => this.setState({ events: response }));
-    }
+    getEvents(lat, lon, page).then(events => this.setState({ events }));
   }
 
   render() {
     return (
       <div className="App">
-        <h1 className = "header">Meetup</h1>
         <CitySearch updateEvents={this.updateEvents} />
-        <EventList events={this.state.events} />
-        <NumberOfEvents updateEvents={this.updateEvents} numberOfEvents={this.state.events.length} lat={this.state.lat} lon={this.state.lon} />
+        <EventList events={this.state.events}/>
+        <NumberOfEvents numOfEventsListed={this.state.numOfEventsListed}/>
       </div>
     );
   }
