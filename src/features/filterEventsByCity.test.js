@@ -8,9 +8,10 @@ import { mockEvents } from '../mock-events';
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
 defineFeature(feature, test => {
-
   test('By default, when user hasn’t searched for a city, show upcoming events based on the user’s location', ({ given, when, then }) => {
-    given('user hasn’t searched for any city', () => {});
+    given('user hasn’t searched for any city', () => {
+
+    });
 
     let AppWrapper;
     when('the user opens the app', () => {
@@ -19,7 +20,7 @@ defineFeature(feature, test => {
 
     then('the user should see the list of upcoming events from their location', () => {
       AppWrapper.update();
-      expect(AppWrapper.find('.events')).toHaveLength(mockEvents.events.length);
+      expect(AppWrapper.find('.Event')).toHaveLength(mockEvents.events.length);
     });
   });
 
@@ -38,6 +39,7 @@ defineFeature(feature, test => {
     });
   });
 
+
   test('User can select a city from the suggested list', ({ given, and, when, then }) => {
     let AppWrapper;
     given('user was typing “Munich” in the city textbox', () => {
@@ -51,16 +53,16 @@ defineFeature(feature, test => {
     });
 
     when('the user selects a city (e.g., “Munich, Germany”) from the list', () => {
-      expect(AppWrapper.find('.suggestions li')).toHaveLength(2);
+      AppWrapper.find('.suggestions li').at(0).simulate('click');
     });
 
     then('their city should be changed to that city (i.e., “Munich, Germany”)', () => {
       const CitySearchWrapper = AppWrapper.find(CitySearch);
-      expect(CitySearchWrapper.state('query')).toBe('Munich');
+      expect(CitySearchWrapper.state('query')).toBe('Munich, Germany');
     });
 
     and('the user should receive a list of upcoming events in that city', () => {
-      expect(AppWrapper.find('.events'));
+      expect(AppWrapper.find('.Event')).toHaveLength(mockEvents.events.length);
     });
   });
 });
