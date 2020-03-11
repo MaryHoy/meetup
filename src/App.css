@@ -104,7 +104,7 @@ input[type="text"], input[type="number"] {
   overflow-x: hidden;
 }
 
-.numOfEventsListed {
+.numberOfEventsListed {
   width: 70px;
   margin: 20px 0 50px;
   text-align: middle;

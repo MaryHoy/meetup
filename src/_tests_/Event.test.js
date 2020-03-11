@@ -32,26 +32,23 @@ describe('<Event />, render', () => {
   });
 
   test('render list of events', () => {
-    expect(EventWrapper.find('.event-list')).toHaveLength(1);
+    expect(EventWrapper.find('.events')).toHaveLength(1);
   });
 
   test('render event data', () => {
-    EventWrapper.find('.event-list li');
+    EventWrapper.find('.events');
     expect(EventWrapper.state('showDetails')).toBe(false);
   });
 
   test('render event time', () => {
-    //const event = EventWrapper.props('event');
     expect(EventWrapper.find('.event_date-time')).toHaveLength(1);
   });
 
   test('render event date', () => {
-    //const events = EventWrapper.state('events');
     expect(EventWrapper.find('.event_date-time')).toHaveLength(1);
   });
 
   test('render group name', () => {
-    //const events = EventWrapper.state('events');
     expect(EventWrapper.find('.group_name')).toHaveLength(1);
   });
 
@@ -61,7 +58,7 @@ describe('<Event />, render', () => {
   });
 
   test('render detail button', () => {
-    expect(EventWrapper.find('.showDetails'));
+    expect(EventWrapper.find('.detail-btn'));
   });
 
   test('details', () => {
