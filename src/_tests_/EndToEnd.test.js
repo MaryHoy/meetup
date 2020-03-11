@@ -10,7 +10,7 @@ describe('show/hide an event details', () => {
         slowMo: 250 // slow down by 250ms
       });    page = await browser.newPage();
     await page.goto('http://localhost:3000/');
-    await page.waitForSelector('.Event');
+    await page.waitForSelector('.event');
   });
 
   afterAll(() => {
@@ -18,14 +18,14 @@ describe('show/hide an event details', () => {
   });
 
   test('An event element is collapsed by default', async () => {
-    const extra = await page.$('.Event .extra');
+    const extra = await page.$('.event .extra');
     expect(extra).toBeNull();
   });
 
   test('User can expand an event to see its details', async () => {
-    await page.click('.Event .details-btn');
+    await page.click('.event .details-btn');
 
-    const extra = await page.$('.Event .extra');
+    const extra = await page.$('.event .extra');
     expect(extra).toBeDefined();
   });
 
