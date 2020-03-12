@@ -12,7 +12,7 @@ class App extends Component {
     lat: null,
     lon: null,
     page: null,
-    numOfEventsListed: null
+    numberOfEventsListed: null
   }
 
   updateEvents = (lat, lon, page) => {
