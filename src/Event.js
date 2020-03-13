@@ -21,9 +21,9 @@ class Event extends Component {
     return(
       <div className="event">
         <div className="event_Overview">
-          <p className="event_Overview--name">{this.state.event.name}</p>
-          <p className="event_Overview--localDate">{this.state.event.local_date}</p>
-          <button className="details-btn" onClick={() => this.handleShowDetails()}>show details</button>
+          <p className="event_Overview-name">{this.state.event.name}</p>
+          <p className="event_Overview-localDate">{this.state.event.local_date}</p>
+          <button className="details-btn" onClick={() => this.handleShowDetails()}>Details</button>
         </div>
         {showDetails &&
           <div className="event_Details">
