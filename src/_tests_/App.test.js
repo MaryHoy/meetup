@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import App from '../App';
+
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
-import Event from '../Event';
 import NumberOfEvents from '../NumberOfEvents';
 import { mockEvents } from '../mock-events';
 
 describe('<App /> component', () => {
+
   let AppWrapper;
-  // use beforeAll() to avoid code repetion, before every expect() this line of code is executed
   beforeAll(() => {
     AppWrapper = shallow(<App />);
   });
@@ -25,6 +25,14 @@ describe('<App /> component', () => {
   test('render NumberOfEvents', () => {
     expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
   });
+});
+
+describe('<App /> integration', () => {
+
+  let AppWrapper;
+  afterAll(() => {
+    AppWrapper.unmount();
+  });
 
   test('get list of events after user selects a city', async () => {
     const AppWrapper = mount(<App />);
@@ -34,7 +42,16 @@ describe('<App /> component', () => {
     CitySearchWrapper.instance().handleItemClicked('value', 1.1, 1.2);
     expect(AppWrapper.instance().updateEvents).toHaveBeenCalledTimes(1);
     expect(AppWrapper.instance().updateEvents).toHaveBeenCalledWith(1.1, 1.2);
-    AppWrapper.unmount();
+  });
+
+  test('update List of events after user changes number of events', () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.instance().updateEvents = jest.fn();
+    AppWrapper.instance().forceUpdate();
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    NumberOfEventsWrapper.instance().handleInputChanged({ target: { value: 1 } });
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledTimes(1);
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledWith(null, null, 1);
   });
 
   test('change state after get list of events', async () => {
@@ -43,4 +60,11 @@ describe('<App /> component', () => {
     await AppWrapper.update();
     expect(AppWrapper.state('events')).toEqual(mockEvents.events);
   });
+
+  test('render correct list of events', () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.setState({ events: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }] });
+    expect(AppWrapper.find('.event')).toHaveLength(4);
+  })
+
 });

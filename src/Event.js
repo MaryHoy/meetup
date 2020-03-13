@@ -2,48 +2,36 @@ import React, { Component } from 'react';
 
 class Event extends Component {
   state = {
-    showDetails: false,
-    events: []
-  };
+    event: [],
+    showDetails: false
+  }
 
-  handleClick = () => {
-    this.setState({ showDetails: !this.state.showDetails })
+  handleShowDetails = () => {
+    if(this.state.showDetails === false) {
+      this.setState({ showDetails: true });
+    }
+    else {
+      this.setState({ showDetails: false });
+    }
   }
 
   render() {
-    const event = this.props.event;
-    return (
-      <div className="events">
-        <ul className="event-list">
-          <li key={event.id}>
-            <div>
-              <p className="event_date-time">{event.local_time} - {event.local_date}</p>
-              <p className="event_name">{event.name}</p>
-              <p className="group_name">GROUP: {event.group.name}</p>
-              <p className="event_rsvp">{event.yes_rsvp_count} people signed up for this meeting</p>
-              {this.state.showDetails &&
-              <div className="eventDetails">
-                <p className="address">
-                  <span>{event.venue.name},</span>
-                  <span>{event.venue.address_1},</span>
-                  <span>{event.venue.address_2},</span>
-                  <span>{event.venue.address_3},</span>
-                  <span>{event.venue.city},</span>
-                  <span>{event.venue.localized_country_name}</span>
-                </p>
-                <div>
-                  <p className="description">{event.description}</p>
-                  <p className="visibility">{event.visibility}</p>
-                  <p className="link"><a>{event.link}</a></p>
-                </div>
-              </div>
-              }
-              <button className="showDetails" onClick={this.handleClick}>Show Details</button>
-            </div>
-          </li>
-        </ul>
+    const showDetails = this.state.showDetails;
+
+    return(
+      <div className="event">
+        <div className="event__Overview">
+          <p className="event__Overview--name">{this.state.event.name}</p>
+          <p className="event__Overview--localDate">{this.state.event.local_date}</p>
+          <button className="details-btn" onClick={() => this.handleShowDetails()}>show details</button>
+        </div>
+        {showDetails &&
+          <div className="event__Details">
+            <p className="event__Details--description">{this.state.event.description}</p>
+          </div>
+        }
       </div>
-    )
+    );
   }
 }
 

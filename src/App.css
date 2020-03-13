@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   padding: 2% 5%;
-  background-color: rgb(208, 238, 244);
 }
 
 .App * {
@@ -9,7 +8,7 @@
 }
 
 ul {
-  padding: 20px;
+  padding: 0;
   list-style: none;
 }
 
@@ -32,10 +31,9 @@ input[type="text"], input[type="number"] {
   width: 250px;
 }
 
-.city-search {
+.CitySearch {
   display: flex;
   flex-direction: column;
-  color: grey;
 }
 
 .suggestions {
@@ -62,31 +60,26 @@ input[type="text"], input[type="number"] {
   background-color: #BCDCDB;
 }
 
-
-.events {
-  background-color: rgb(246, 249, 249) ;
-  display: flex;
-  flex-wrap: wrap;
+.Event {
   padding: 10px 10px 20px;
   margin-bottom: 10px;
   text-align: left;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 4px;
   position: relative;
 }
 
-.showDetails {
-  background-color: white;
+.details-btn {
   position: absolute;
-  right: 10px;
-  bottom: 10px;
+  right: 5px;
+  bottom: 5px;
   padding: 5px 8px;
-  border-radius: 8px;
+  border-radius: 4px;
   outline: none;
   cursor: pointer;
 }
 
-.event_name {
+.name {
   font-size: 18px;
   font-weight: 600;
 }
@@ -104,8 +97,8 @@ input[type="text"], input[type="number"] {
   overflow-x: hidden;
 }
 
-.numberOfEventsListed {
-  width: 70px;
+.number-of-events {
+  width: 80px;
   margin: 20px 0 50px;
-  text-align: middle;
+  text-align: right;
 }

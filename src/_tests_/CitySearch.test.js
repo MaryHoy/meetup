@@ -6,8 +6,8 @@ describe('<CitySearch /> component', () => {
 
   let CitySearchWrapper;
   beforeAll(() => {
-      CitySearchWrapper = shallow(<CitySearch updateEvents={() =>{}}/>);
-    });
+    CitySearchWrapper = shallow(<CitySearch />);
+  });
 
   test('render text input', () => {
     expect(CitySearchWrapper.find('.city')).toHaveLength(1);
@@ -23,20 +23,21 @@ describe('<CitySearch /> component', () => {
   });
 
   test('change state when text input changes', () => {
-    const eventObject = { target: { value: 'Munich' }};
+    const eventObject = { target: { value: 'Berlin' }};
     CitySearchWrapper.find('.city').simulate('change', eventObject);
-    expect(CitySearchWrapper.state('query')).toBe('Munich');
+    expect(CitySearchWrapper.state('query')).toBe('Berlin');
   });
 
   test('render list of suggestions correctly', () => {
     const suggestions = CitySearchWrapper.state('suggestions');
     expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(suggestions.length);
-      for (let i = 0; i < suggestions.length; i += 1) {
-        expect(CitySearchWrapper.find('.suggestions li').at(i).text()).toBe(suggestions[i].name_string);
-      }
+    for (let i = 0; i < suggestions.length; i += 1) {
+      expect(CitySearchWrapper.find('.suggestions li').at(i).text()).toBe(suggestions[i].name_string);
+    }
   });
 
-  test('click on suggestion should change query state and empty the list of suggestions', () => {
+  test('click on suggestion should change query state and empty list of suggestions', () => {
+    CitySearchWrapper = shallow(<CitySearch updateEvents={() => {}}/>);
     CitySearchWrapper.setState({
       suggestions: [
         {
@@ -63,7 +64,7 @@ describe('<CitySearch /> component', () => {
     expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(2);
     CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
     expect(CitySearchWrapper.state('query')).toBe('Munich, Germany');
-    expect(CitySearchWrapper.find('suggestions li')).toHaveLength(0);
+    expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(0);
   });
 });
 
