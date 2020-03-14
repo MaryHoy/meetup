@@ -14,10 +14,10 @@ class App extends Component {
 
   state = {
     events: [],
+    page: [],
     defaultCity: '',
     lat: null,
-    lon: null,
-    page: null
+    lon: null
   }
 
   updateEvents = (lat, lon, page) => {
