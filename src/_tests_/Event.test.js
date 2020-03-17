@@ -1,59 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from '../App';
-
-import EventList from '../EventList';
 import Event from '../Event';
 
 describe('<Event /> component', () => {
 
   let EventWrapper;
-  beforeAll(() => {
-    EventWrapper = shallow(<Event />);
-  });
-
-  test('test that componet is rendered', () => {
-    expect(EventWrapper).toHaveLength(1);
-  });
-
-  test('test that event wrapping div is rendered', () => {
-    expect(EventWrapper.find('.event')).toHaveLength(1);
-  });
-
-  test('test that event wrapping div just shows event_Overview', () => {
-    expect(EventWrapper.find('.event').children()).toHaveLength(1);
-  });
-
-  test('test that event_Overview is rendered', () => {
-    expect(EventWrapper.find('.event_Overview')).toHaveLength(1);
-  });
-
-  test('test that event_Overview children are rendered', () => {
-    expect(EventWrapper.find('.event_Overview').children()).toHaveLength(3);
-  });
-
-  test('test that event_Details children are rendered', () => {
-    EventWrapper.setState({
-      showDetails: true
-    });
-    expect(EventWrapper.find('.event_Details-description')).toHaveLength(1);
-  });
-
-  test('test that show/hide details button is rendered', () => {
-    expect(EventWrapper.find('.event_Overview button')).toHaveLength(1);
-  });
-
-  test('click on button should show details', () => {
-    EventWrapper.setState({
-      showDetails: false
-    });
-    EventWrapper.find('.event_Overview button').simulate('click');
-    expect(EventWrapper.state('showDetails')).toBe(true);
-  });
-
-  test('set mock eventdata as state', () => {
-    EventWrapper.setState({
-      event: {
+  const events = 
+      {
         created: 1563825339000,
         duration: 9000000,
         id: "263370107",
@@ -95,11 +48,52 @@ describe('<Event /> component', () => {
         timezone: "Europe/Berlin"
         },
         link: "https://www.meetup.com/de-DE/jug-hamburg/events/263370107/",
-        description: "<p>Wer Microservices in Java entwickeln möchte, muss nicht zwangsläufig zu Spring Boot greifen. Es lohnt ein Blick auf alternative Frameworks, die in zunehmender Anzahl verfügbar sind und bezüglich ihrer Funktionalität stark aufholen. So schreitet auch die Entwicklung des MicroProfiles weiter voran. In beeindruckender Geschwindigkeit wurden zahlreiche APIs entwickelt, die (nicht nur) für die Entwicklung von Microservices sehr hilfreich sind.<br/>Hierzu zählen die Unterstützung von Metriken, Health Checks, Fault Tolerance und JSON Web Tokens. Für den Einsatz im Projekt kann aus unterschiedlichen Implementierungen wie TomEE, Thorntail oder OpenLiberty gewählt werden. In dieser Live-Coding-Session wird der praktische Einsatz von MicroProfile anhand eines Praxisbeispiels demonstriert.<br/> <br/> <br/>Referent:<br/>Thilo Frotscher arbeitet als freiberuflicher Softwarearchitekt und Trainer. Als Experte für Enterprise Java und Systemintegration unterstützt er seine Kunden überwiegend durch Entwicklung, Reviews oder die Durchführung von Schulungen. Thilo ist (Co-)Autor mehrerer Bücher in den Bereichen Java EE, (Web) Services und Systemintegration, hat zahlreiche Fachartikel verfasst und spricht regelmäßig auf Fachkonferenzen und Schulungsveranstaltungen oder bei Java User Groups.</p> ",
+        description: "Wer Microservices in Java entwickeln möchte, muss nicht zwangsläufig zu Spring Boot greifen. Es lohnt ein Blick auf alternative Frameworks, die in zunehmender Anzahl verfügbar sind und bezüglich ihrer Funktionalität stark aufholen. So schreitet auch die Entwicklung des MicroProfiles weiter voran. In beeindruckender Geschwindigkeit wurden zahlreiche APIs entwickelt, die (nicht nur) für die Entwicklung von Microservices sehr hilfreich sind.<br/>Hierzu zählen die Unterstützung von Metriken, Health Checks, Fault Tolerance und JSON Web Tokens. Für den Einsatz im Projekt kann aus unterschiedlichen Implementierungen wie TomEE, Thorntail oder OpenLiberty gewählt werden. In dieser Live-Coding-Session wird der praktische Einsatz von MicroProfile anhand eines Praxisbeispiels demonstriert.<br/> <br/> <br/>Referent:<br/>Thilo Frotscher arbeitet als freiberuflicher Softwarearchitekt und Trainer. Als Experte für Enterprise Java und Systemintegration unterstützt er seine Kunden überwiegend durch Entwicklung, Reviews oder die Durchführung von Schulungen. Thilo ist (Co-)Autor mehrerer Bücher in den Bereichen Java EE, (Web) Services und Systemintegration, hat zahlreiche Fachartikel verfasst und spricht regelmäßig auf Fachkonferenzen und Schulungsveranstaltungen oder bei Java User Groups. ",
         visibility: "public",
         member_pay_fee: false
       }
-    });
-    expect(EventWrapper.state('event').name).toBe('Microservices mit dem MicroProfile 3.x');
+
+  beforeAll(() => {
+    EventWrapper = shallow(<Event event={events} />);
   });
+
+  test('test that componet is rendered', () => {
+    expect(EventWrapper).toHaveLength(1);
+  });
+
+  test('test that event wrapping div is rendered', () => {
+    expect(EventWrapper.find('.event')).toHaveLength(1);
+  });
+
+  test('test that event wrapping div just shows eventOverview', () => {
+    expect(EventWrapper.find('.event').children()).toHaveLength(1);
+  });
+
+  test('test that eventOverview is rendered', () => {
+    expect(EventWrapper.find('.eventOverview')).toHaveLength(1);
+  });
+
+  test('test that eventOverview children are rendered', () => {
+    expect(EventWrapper.find('.eventOverview').children()).toHaveLength(3);
+  });
+
+  test('test that eventDetails children are rendered', () => {
+    EventWrapper.setState({
+      showDetails: true
+    });
+    expect(EventWrapper.find('.eventDetailsDescription')).toHaveLength(1);
+  });
+
+  test('test that show/hide details button is rendered', () => {
+    expect(EventWrapper.find('.eventOverview button')).toHaveLength(1);
+  });
+
+  test('click on button should show details', () => {
+    EventWrapper.setState({
+      showDetails: false
+    });
+    EventWrapper.find('.eventOverview button').simulate('click');
+    expect(EventWrapper.state('showDetails')).toBe(true);
+  });
+
 });

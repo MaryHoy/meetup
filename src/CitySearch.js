@@ -35,13 +35,14 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="CitySearch">
+        <h3>Meetup</h3>
         <InfoAlert text={this.state.infoText} />
         <input
           type="text"
           className="city"
           value={this.state.query}
           onChange={this.handleInputChanged}
-          placeholder="Your City"
+          placeholder="City"
         />
 
         <ul className="suggestions">

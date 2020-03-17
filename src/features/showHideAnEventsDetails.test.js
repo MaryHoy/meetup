@@ -45,7 +45,7 @@ defineFeature(feature, test => {
     	});
 
     	then('the details of the selected event will show', () => {
-		  expect(AppWrapper.find(".event .event_Details")).toHaveLength(1);  
+		  expect(AppWrapper.find(".event .eventDetails")).toHaveLength(1);  
 		});
 	  });
 
@@ -59,7 +59,7 @@ defineFeature(feature, test => {
     	and('details of event are shown', () => {
 		  AppWrapper.update();
       	  AppWrapper.find('.event .details-btn').at(0).simulate('click');
-    	  expect(AppWrapper.find('.event .event_Details')).toHaveLength(1);
+    	  expect(AppWrapper.find('.event .eventDetails')).toHaveLength(1);
   		});
 
     	when('the user clicks on the details-button', () => {
