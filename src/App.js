@@ -11,7 +11,7 @@ class App extends Component {
 
   componentDidMount() {
     getEvents().then(response => this.setState({ events: response }));
-    window.addEventListener('online', this.offLineAlert());
+    window.addEventListener('online', this.OfflineAlert());
   }
 
   state = {
@@ -23,10 +23,10 @@ class App extends Component {
     OfflineText: ''
   }
 
-  offLineAlert = () => {
+  OfflineAlert = () => {
     if(navigator.onLine === false) {
       this.setState({
-        offlineText: 'No internet connectiion. Please connect to view updated list.'
+        offlineText: 'No internet connection. Please connect to view updated list.'
       });
     } else {
       this.setState({
