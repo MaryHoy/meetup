@@ -11,7 +11,7 @@ class App extends Component {
 
   componentDidMount() {
     getEvents().then(response => this.setState({ events: response }));
-    window.addEventListener('online', this.OfflineAlert());
+    window.addEventListener('offline', this.OfflineAlert());
   }
 
   state = {
