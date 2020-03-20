@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   OfflineAlert = () => {
-    if(navigator.onLine === false) {
+    if(navigator.offLine === false) {
       this.setState({
         offlineText: 'No internet connection. Please connect to view updated list.'
       });
