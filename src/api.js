@@ -33,7 +33,7 @@ async function getSuggestions(query) {
       + query
       + '&access_token=' + token;
     const result = await axios.get(url);
-    const events = result.data.events;
+    const events = result.events;
     if (events.length) { // Check if the events exist
       localStorage.setItem('lastEvents', JSON.stringify(events));
     }
@@ -70,7 +70,7 @@ async function getEvents(lat, lon, page) {
       url += '&lat=' + lat + '&lon=' + lon + '&page=' + page;
     }
     const result = await axios.get(url);
-    const events = result.data.events;
+    const events = result.events;
     return events;
   }
 
